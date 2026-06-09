@@ -1,21 +1,31 @@
-#include<iostream>
-#include<vector>
-#include<climits>
+//moores voating algorithm
+#include <iostream>
+#include <vector>
 using namespace std;
-int kadane(vector<int>& arr){
-    int currsum=0;
-    int maxsum=INT_MIN;
-     for(int i=0;i<arr.size();i++){
-        currsum+=arr[i];
-        maxsum=max(maxsum,currsum);
-        if(currsum<0){
-            currsum=0;
+
+int majorityElement(vector<int>& nums) {
+    int freq = 0;
+    int ans = 0;
+
+    for (int i = 0; i < nums.size(); i++) {
+        if (freq == 0) {
+            ans = nums[i];
         }
-     }
-     return maxsum;
+
+        if (ans == nums[i]) {
+            freq++;
+        } else {
+            freq--;
+        }
+    }
+
+    return ans;
 }
-int main(){
-    vector<int>arr={3, -4, 5, 4, -1, 7, -8};
-    cout<<"maximum subarray sum= "<<kadane(arr)<<endl;
+
+int main() {
+    vector<int> nums = {2, 2, 1, 1, 2, 2, 2};
+
+    cout << "Majority Element: " << majorityElement(nums) << endl;
+
     return 0;
 }
