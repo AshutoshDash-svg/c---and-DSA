@@ -1,25 +1,21 @@
-//find the index of the smallest and the larget value for the array
 #include<iostream>
+#include<vector>
 #include<climits>
-using namespace std;int main(){
-cout<<"enter the number :"<<endl;
-int nums[6];
-int size=6;
-for(int i=0;i<size;i++){
-    cin>>nums[i];
-    }
-    int smallestindex=0;
-    int largestindex=0;
-    for(int i=0;i<size;i++){
-        if(nums[i]<nums[smallestindex]){
-            smallestindex=i;
+using namespace std;
+int kadane(vector<int>& arr){
+    int currsum=0;
+    int maxsum=INT_MIN;
+     for(int i=0;i<arr.size();i++){
+        currsum+=arr[i];
+        maxsum=max(maxsum,currsum);
+        if(currsum<0){
+            currsum=0;
         }
-        if(nums[i]>nums[largestindex]){
-            largestindex=i;
-        }
-    }
-    cout<<"smallest value ="<<nums[smallestindex]
-    <<"at index "<<smallestindex<<endl;
-    cout<<"largest value= "<<nums[largestindex]
-    <<"at index of "<<largestindex<<endl;
+     }
+     return maxsum;
+}
+int main(){
+    vector<int>arr={3, -4, 5, 4, -1, 7, -8};
+    cout<<"maximum subarray sum= "<<kadane(arr)<<endl;
+    return 0;
 }
